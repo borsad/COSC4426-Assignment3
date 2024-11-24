@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Air Quality Visualization</title>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="app.js"></script>
+    <style>
+        /* Button styles */
+        #show-more-button {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
+        }
+
+        /* Button hover effect */
+        #show-more-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Ensure A-Frame scene takes up the full screen */
+        body, html {
+            margin: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        /* Style for A-Frame scene to ensure it's visible */
+        a-scene {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <a-scene>
+        <!-- Camera video element for background -->
+        <a-assets>
+            <video id="camera-video" autoplay="true" loop="true" width="1920" height="1080"></video>
+        </a-assets>
+
+        <!-- Apply video texture to a large plane -->
+        <a-plane position="0 0 -10" rotation="0 0 0" width="100" height="100"
+                 material="src: #camera-video; shader: flat;"></a-plane>
+
+        <!-- A-Frame camera for scene interaction -->
+        <a-camera position="0 1.6 3" id="camera"></a-camera>
+
+        <!-- Dynamic content container where data will be rendered -->
+        <a-entity id="dynamic-content"></a-entity>
+    </a-scene>
+
+    <!-- Show More button -->
+    <button id="show-more-button">Show More</button>
+</body>
+</html>
